@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sumeet Dhakad | Backend Engineer</title>
+    <!-- Favicon (Browser Tab Icon) -->
+    <link rel="icon" type="image/png" sizes="32x32" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👨‍💻</text></svg>">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <!-- AOS (Animate on Scroll) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+    <style>
+        /* ----- RESET & BASE ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0b0f19;
+            color: #e8edf5;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* ----- ANIMATED BACKGROUND ----- */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(-45deg, #0b0f19, #141b2b, #1a253b, #0f1a2b);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.3;
+            z-index: -1;
+            animation: floatOrb 10s infinite alternate ease-in-out;
+        }
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: #2c6b9e;
+            top: -100px;
+            left: -100px;
+        }
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: #6b2c9e;
+            bottom: -150px;
+            right: -150px;
+            animation-delay: 3s;
+        }
+        @keyframes floatOrb {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(60px, 60px) scale(1.2); }
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 30px 25px 60px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ----- NAVIGATION ----- */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            color: #a0b3cc;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 4px;
+        }
+        .nav-links a:hover {
+            color: #ffffff;
+            border-bottom-color: #60a5fa;
+        }
+
+        /* ----- HERO ----- */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 40px 0 60px;
+        }
+        .hero h1 {
+            font-size: 3.8rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            background: linear-gradient(to right, #ffffff, #94b8ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero .typewriter-container {
+            font-size: 1.6rem;
+            font-weight: 400;
+            color: #c8d6e5;
+            margin-top: 12px;
+            min-height: 60px;
+        }
+        .hero .typewriter-container .typewriter-text {
+            color: #60a5fa;
+            font-weight: 600;
+            border-right: 3px solid #60a5fa;
+            padding-right: 8px;
+            animation: blink 0.8s step-end infinite;
+        }
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+        .hero .tagline {
+            font-size: 1.1rem;
+            color: #8aa0bc;
+            max-width: 600px;
+            margin-top: 16px;
+        }
+        .hero-badges {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 25px;
+        }
+        .hero-badges span {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            backdrop-filter: blur(8px);
+            transition: all 0.3s;
+            cursor: default;
+        }
+        .hero-badges span:hover {
+            background: #2c6b9e;
+            border-color: #2c6b9e;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px -8px rgba(44, 107, 158, 0.4);
+        }
+        .social-hero {
+            margin-top: 30px;
+            display: flex;
+            gap: 20px;
+        }
+        .social-hero a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #c8d6e5;
+            font-size: 1.4rem;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        .social-hero a:hover {
+            background: #2c6b9e;
+            border-color: #2c6b9e;
+            color: #fff;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -8px rgba(44, 107, 158, 0.5);
+        }
+
+        /* ----- SECTIONS ----- */
+        .section {
+            margin-top: 70px;
+        }
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            display: inline-block;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 60%;
+            height: 4px;
+            background: linear-gradient(90deg, #60a5fa, #a78bfa);
+            border-radius: 4px;
+        }
+
+        /* ----- SUMMARY CARD ----- */
+        .summary-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 20px;
+            padding: 30px 35px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .summary-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.6);
+        }
+        .summary-card p {
+            font-size: 1.05rem;
+            color: #d0dcec;
+            line-height: 1.8;
+        }
+        .summary-card strong {
+            color: #ffffff;
+        }
+
+        /* ----- SKILLS ----- */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+        .skill-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 22px 24px;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+        .skill-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            border-color: #60a5fa;
+            box-shadow: 0 15px 40px -15px rgba(96, 165, 250, 0.2);
+            background: rgba(255, 255, 255, 0.06);
+        }
+        .skill-card h3 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #60a5fa;
+            margin-bottom: 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            padding-bottom: 10px;
+        }
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .skill-tag {
+            background: rgba(96, 165, 250, 0.08);
+            border: 1px solid rgba(96, 165, 250, 0.15);
+            border-radius: 30px;
+            padding: 5px 16px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #c8d6e5;
+            transition: all 0.25s;
+        }
+        .skill-tag:hover {
+            background: #2c6b9e;
+            border-color: #2c6b9e;
+            color: #fff;
+            transform: scale(1.05);
+        }
+
+        /* ----- TIMELINE (Experience) ----- */
+        .timeline-item {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 28px 30px;
+            margin-bottom: 25px;
+            transition: all 0.3s;
+        }
+        .timeline-item:hover {
+            border-color: rgba(96, 165, 250, 0.3);
+            transform: translateX(6px);
+            box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.5);
+        }
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+        .timeline-header h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+        .timeline-header .meta {
+            color: #60a5fa;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        .timeline-item ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .timeline-item ul li {
+            position: relative;
+            padding-left: 28px;
+            margin-bottom: 12px;
+            color: #c8d6e5;
+        }
+        .timeline-item ul li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: #60a5fa;
+            font-weight: bold;
+        }
+        .highlight {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        /* ----- PROJECTS ----- */
+        .project-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 28px 30px;
+            margin-bottom: 25px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
+            perspective: 800px;
+        }
+        .project-card:hover {
+            transform: translateY(-8px) rotateX(2deg) rotateY(2deg);
+            border-color: #60a5fa;
+            box-shadow: 0 25px 50px -20px rgba(96, 165, 250, 0.25);
+        }
+        .project-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #fff;
+        }
+        .project-card .tech-stack {
+            color: #60a5fa;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin: 6px 0 12px;
+        }
+        .project-card p {
+            color: #c8d6e5;
+        }
+
+        /* ----- LEETCODE STAT CARDS ----- */
+        .lc-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .lc-stat-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 18px 12px;
+            text-align: center;
+            backdrop-filter: blur(8px);
+            transition: all 0.3s;
+        }
+        .lc-stat-card:hover {
+            transform: translateY(-5px);
+            border-color: #60a5fa;
+            box-shadow: 0 10px 30px -15px rgba(96, 165, 250, 0.2);
+        }
+        .lc-stat-card .number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+        .lc-stat-card .label {
+            font-size: 0.75rem;
+            color: #8aa0bc;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 4px;
+        }
+        .lc-stat-card.total .number { color: #60a5fa; }
+        .lc-stat-card.easy .number { color: #00b894; }
+        .lc-stat-card.medium .number { color: #fdcb6e; }
+        .lc-stat-card.hard .number { color: #e17055; }
+        .lc-stat-card.rank .number { color: #a78bfa; }
+
+        /* ----- HEATMAP ----- */
+        .heatmap-wrapper {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            backdrop-filter: blur(8px);
+            transition: all 0.3s;
+        }
+        .heatmap-wrapper:hover {
+            border-color: #60a5fa;
+            transform: translateY(-4px);
+            box-shadow: 0 15px 40px -15px rgba(96, 165, 250, 0.15);
+        }
+        .heatmap-wrapper img {
+            max-width: 100%;
+            border-radius: 12px;
+            background: #0b0f19;
+        }
+
+        /* ----- EDUCATION & CERTS ----- */
+        .edu-item,
+        .cert-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            padding: 18px 24px;
+            margin-bottom: 12px;
+            transition: all 0.3s;
+        }
+        .edu-item:hover,
+        .cert-item:hover {
+            border-color: #60a5fa;
+            transform: translateX(6px);
+        }
+        .edu-item strong,
+        .cert-item strong {
+            color: #fff;
+        }
+        .edu-item .meta,
+        .cert-item .meta {
+            color: #8aa0bc;
+            font-size: 0.9rem;
+            margin-left: 8px;
+        }
+
+        /* ----- FOOTER ----- */
+        .footer {
+            margin-top: 70px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            text-align: center;
+            color: #6a7f9b;
+            font-size: 0.95rem;
+        }
+        .footer i {
+            color: #60a5fa;
+        }
+
+        /* ----- SCROLLBAR ----- */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b0f19;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2c6b9e;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #60a5fa;
+        }
+
+        /* ----- RESPONSIVE ----- */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.6rem;
+            }
+            .hero .typewriter-container {
+                font-size: 1.2rem;
+                min-height: 45px;
+            }
+            .navbar {
+                flex-direction: column;
+                align-items: center;
+            }
+            .nav-links {
+                justify-content: center;
+                gap: 15px;
+            }
+            .container {
+                padding: 20px 15px 40px;
+            }
+            .section-title {
+                font-size: 1.8rem;
+            }
+            .timeline-header {
+                flex-direction: column;
+            }
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            .lc-stats-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .hero-badges span {
+                font-size: 0.75rem;
+                padding: 5px 14px;
+            }
+            .lc-stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ====== BACKGROUND EFFECTS ====== -->
+    <div class="bg-animation"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <div class="container">
+
+        <!-- ====== NAVBAR ====== -->
+        <nav class="navbar" data-aos="fade-down" data-aos-duration="800">
+            <div class="logo">Sumeet.dev</div>
+            <div class="nav-links">
+                <a href="#summary">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#experience">Experience</a>
+                <a href="#projects">Projects</a>
+                <a href="#leetcode">LeetCode</a>
+                <a href="#education">Education</a>
+            </div>
+        </nav>
+
+        <!-- ====== HERO ====== -->
+        <section class="hero" data-aos="fade-up" data-aos-duration="1000">
+            <h1>Sumeet Dhakad</h1>
+            <div class="typewriter-container">
+                <span class="typewriter-text" id="typewriter"></span>
+            </div>
+            <p class="tagline">
+                Backend Software Engineer with 4+ years of experience building scalable microservices, cloud-native systems, and high-performance APIs.
+            </p>
+            <div class="hero-badges">
+                <span><i class="fas fa-code"></i> Java 17</span>
+                <span><i class="fas fa-leaf"></i> Spring Boot</span>
+                <span><i class="fas fa-cloud"></i> AWS</span>
+                <span><i class="fas fa-cubes"></i> Microservices</span>
+                <span><i class="fas fa-docker"></i> Docker</span>
+                <span><i class="fas fa-project-diagram"></i> System Design</span>
+            </div>
+            <div class="social-hero">
+                <a href="https://github.com/Sumeet-source" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/sumeetdhakad" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="mailto:sumeetfromsummit@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                <a href="https://leetcode.com/u/dhakads458669/" target="_blank" aria-label="LeetCode"><i class="fas fa-code"></i></a>
+            </div>
+        </section>
+
+        <!-- ====== SUMMARY ====== -->
+        <section id="summary" class="section" data-aos="fade-right">
+            <h2 class="section-title">Professional Summary</h2>
+            <div class="summary-card">
+                <p>
+                    Results-driven Java Developer with <strong>4+ years</strong> of experience designing and building scalable enterprise applications using Java, Spring Boot, and microservices architecture. Proficient in developing RESTful APIs, optimizing database performance, and deploying cloud-native solutions on AWS. Proven ability to deliver high-quality software in Agile environments while collaborating effectively with cross-functional teams. Passionate about writing clean, maintainable code and driving technical excellence in fast-paced development cycles.
+                </p>
+            </div>
+        </section>
+
+        <!-- ====== SKILLS ====== -->
+        <section id="skills" class="section" data-aos="fade-left">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3>Programming</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Java (J2EE, Spring, Java 8)</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">C/C++</span>
+                        <span class="skill-tag">SQL</span>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <h3>Frameworks</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Spring Boot</span>
+                        <span class="skill-tag">Spring Security</span>
+                        <span class="skill-tag">Spring Cloud</span>
+                        <span class="skill-tag">REST APIs</span>
+                        <span class="skill-tag">Swagger</span>
+                        <span class="skill-tag">Hibernate</span>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <h3>DevOps &amp; Cloud</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Kubernetes</span>
+                        <span class="skill-tag">Jenkins</span>
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">CI/CD</span>
+                        <span class="skill-tag">AWS (Lambda, ECR, EKS)</span>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <h3>Databases &amp; Concepts</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Oracle</span>
+                        <span class="skill-tag">MySQL</span>
+                        <span class="skill-tag">SQL Server</span>
+                        <span class="skill-tag">PostgreSQL</span>
+                        <span class="skill-tag">MongoDB</span>
+                        <span class="skill-tag">OOP / DSA</span>
+                        <span class="skill-tag">System Design</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ====== EXPERIENCE ====== -->
+        <section id="experience" class="section" data-aos="fade-right">
+            <h2 class="section-title">Professional Experience</h2>
+            <div class="timeline-item">
+                <div class="timeline-header">
+                    <h3>Software Engineer — Tata Consultancy Services</h3>
+                    <span class="meta"><i class="far fa-calendar-alt"></i> Mar 2022 – Feb 2026</span>
+                </div>
+                <ul>
+                    <li>Architected and deployed <span class="highlight">10+ Spring Boot microservices</span> for enterprise banking and logistics clients (CTBC Bank, Philippines &amp; IKano Bank, Sweden), containerized with Docker.</li>
+                    <li>Built <span class="highlight">CI/CD pipelines</span> using Jenkins and GitHub Actions, cutting deployment time by <span class="highlight">30%</span> and enabling weekly zero-touch releases.</li>
+                    <li>Deployed and managed microservices on <span class="highlight">AWS EKS and ECR</span>, achieving <span class="highlight">99.9% uptime</span> with zero-downtime rolling updates.</li>
+                    <li>Optimized SQL queries and schema design across MySQL/PostgreSQL, reducing average latency by <span class="highlight">20%</span>.</li>
+                    <li>Collaborated with a cross-functional team of 8 engineers in an <span class="highlight">Agile/Scrum</span> environment, consistently delivering sprint commitments.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ====== PROJECTS ====== -->
+        <section id="projects" class="section" data-aos="fade-left">
+            <h2 class="section-title">Featured Projects</h2>
+            
+            <!-- Project 1 -->
+            <div class="project-card">
+                <a href="https://github.com/Sumeet-source/code-snippet" target="_blank" style="text-decoration: none; color: inherit; display: inline-block; transition: color 0.3s;">
+                    <h3>CodeSnippet Search Engine <i class="fas fa-external-link-alt" style="font-size: 0.7em; color: #60a5fa;"></i></h3>
+                </a>
+                <div class="tech-stack"><i class="fas fa-tools"></i> Spring Boot · Elasticsearch · Redis · Docker · RabbitMQ</div>
+                <p>Architected a full-text search engine indexing <span class="highlight">10k+ entries</span> with <span class="highlight">sub-50ms</span> latency. Built an async ingestion pipeline with RabbitMQ to handle high-volume uploads and a Redis caching layer that reduced database load by <span class="highlight">40%</span>.</p>
+            </div>
+
+            <!-- Project 2 (Updated with Link) -->
+            <div class="project-card">
+                <a href="https://github.com/Sumeet-source/cloud-file-storage" target="_blank" style="text-decoration: none; color: inherit; display: inline-block; transition: color 0.3s;">
+                    <h3>Cloud File Storage (Google Drive Lite) <i class="fas fa-external-link-alt" style="font-size: 0.7em; color: #60a5fa;"></i></h3>
+                </a>
+                <div class="tech-stack"><i class="fas fa-tools"></i> Spring Boot · AWS S3 · SQS · Docker · ECS</div>
+                <p>Built a distributed storage service using <span class="highlight">AWS S3 pre-signed URLs</span> and PostgreSQL metadata. Implemented an event-driven microservice with <span class="highlight">AWS SQS</span> for async thumbnail generation. Deployed on AWS ECS with a blue-green zero-downtime strategy.</p>
+            </div>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- ====== LEETCODE DASHBOARD (CLEAN & VISIBLE) ====== -->
+        <!-- ========================================================= -->
+        <section id="leetcode" class="section" data-aos="fade-up">
+            <h2 class="section-title"><i class="fas fa-brain" style="color: #60a5fa;"></i> LeetCode Progress</h2>
+            <p style="color:#8aa0bc; margin-bottom:25px;">
+                I solve Data Structures &amp; Algorithms problems daily to stay sharp! 🚀
+                <br><span style="font-size:0.85rem;">Stats update automatically from my 
+                <a href="https://leetcode.com/u/dhakads458669/" target="_blank" style="color:#60a5fa; text-decoration:none; border-bottom:1px solid #60a5fa;">LeetCode profile</a>.</span>
+            </p>
+
+            <!-- Stat Cards (Big, Bold, Visible) -->
+            <div class="lc-stats-grid">
+                <div class="lc-stat-card total">
+                    <div class="number">18+</div>
+                    <div class="label">Total Solved</div>
+                </div>
+                <div class="lc-stat-card easy">
+                    <div class="number">4</div>
+                    <div class="label">Easy</div>
+                </div>
+                <div class="lc-stat-card medium">
+                    <div class="number">11</div>
+                    <div class="label">Medium</div>
+                </div>
+                <div class="lc-stat-card hard">
+                    <div class="number">3</div>
+                    <div class="label">Hard</div>
+                </div>
+                <div class="lc-stat-card rank">
+                    <div class="number">#4.7M</div>
+                    <div class="label">Global Rank</div>
+                </div>
+            </div>
+
+            <!-- Heatmap -->
+            <div class="heatmap-wrapper">
+                <h4 style="color:#e8edf5; margin-bottom:12px; font-weight:600;">
+                    <i class="fas fa-calendar-check" style="color:#00b894;"></i> Daily Activity (Last 52 Weeks)
+                </h4>
+                <img 
+                    src="https://leetcard.jacoblin.cool/dhakads458669?theme=dark&font=Inter&ext=heatmap" 
+                    alt="LeetCode Daily Heatmap and Stats" 
+                    loading="lazy"
+                    style="max-width:100%; border-radius:12px;"
+                />
+                <p style="color:#6a7f9b; font-size:0.85rem; margin-top:12px;">
+                    📈 <strong style="color:#e8edf5;">Green squares</strong> = days I solved a problem! Updated daily.
+                </p>
+            </div>
+
+            <!-- CTA Button -->
+            <div style="text-align:center; margin-top:25px;">
+                <a href="https://leetcode.com/u/dhakads458669/" target="_blank" style="display:inline-block; background:#2c6b9e; color:#fff; padding:12px 35px; border-radius:40px; text-decoration:none; font-weight:600; transition: all 0.3s; border: 1px solid #2c6b9e; box-shadow: 0 8px 25px -8px rgba(44,107,158,0.4);">
+                    <i class="fas fa-external-link-alt"></i> View Full Profile on LeetCode
+                </a>
+            </div>
+        </section>
+
+        <!-- ====== EDUCATION & CERTS ====== -->
+        <section id="education" class="section" data-aos="fade-up">
+            <h2 class="section-title">Education &amp; Certifications</h2>
+
+            <div class="edu-item">
+                <strong>B.Tech, Computer Science &amp; Engineering</strong>
+                <span class="meta">Aug 2017 – Sep 2021</span>
+                <div style="color:#8aa0bc; margin-top:4px;">Manav Rachna International Institute of Research and Studies, Faridabad</div>
+            </div>
+
+            <div class="cert-item">
+                <strong>Generative AI &amp; Agentic AI</strong> <span class="meta">— IIT Kharagpur (Oct 2025 – Mar 2026)</span>
+            </div>
+            <div class="cert-item">
+                <strong>Java Programming</strong> <span class="meta">— Johns Hopkins University (Coursera) (Jul 2020 – Dec 2020)</span>
+            </div>
+            <div class="cert-item">
+                <strong>C &amp; C++ Systems Programming</strong> <span class="meta">— JS Informatics (May 2019 – Jul 2019)</span>
+            </div>
+        </section>
+
+        <!-- ====== FOOTER ====== -->
+        <footer class="footer">
+            <p>&copy; 2026 Sumeet Dhakad &bull; Built with <i class="fas fa-heart"></i> for clean code and scalable systems</p>
+            <p style="margin-top:8px; font-size:0.8rem;">
+                <i class="fas fa-location-dot"></i> Indore, India &nbsp;|&nbsp; <i class="fas fa-envelope"></i> sumeetfromsummit@gmail.com
+            </p>
+        </footer>
+
+    </div>
+
+    <!-- ====== SCRIPTS ====== -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true,
+            easing: 'ease-out-cubic'
+        });
+
+        // ----- TYPEWRITER EFFECT -----
+        const phrases = [
+            'Backend Software Engineer',
+            'Java & Spring Boot Specialist',
+            'Microservices Architect',
+            'Cloud-Native Developer',
+            'System Design Enthusiast'
+        ];
+        let idx = 0,
+            charIdx = 0,
+            isDeleting = false;
+        const typewriterEl = document.getElementById('typewriter');
+
+        function typeEffect() {
+            const currentPhrase = phrases[idx];
+            if (!isDeleting) {
+                typewriterEl.textContent = currentPhrase.substring(0, charIdx + 1);
+                charIdx++;
+                if (charIdx === currentPhrase.length) {
+                    isDeleting = true;
+                    setTimeout(typeEffect, 2000);
+                    return;
+                }
+                setTimeout(typeEffect, 80);
+            } else {
+                typewriterEl.textContent = currentPhrase.substring(0, charIdx - 1);
+                charIdx--;
+                if (charIdx === 0) {
+                    isDeleting = false;
+                    idx = (idx + 1) % phrases.length;
+                    setTimeout(typeEffect, 400);
+                    return;
+                }
+                setTimeout(typeEffect, 40);
+            }
+        }
+        typeEffect();
+
+        // ----- SMOOTH SCROLL FOR NAV -----
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
